@@ -1,54 +1,98 @@
-# React + TypeScript + Vite
+# Todo List & Directory Manager with Hierarchical Checkboxes 🗂️✅
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![GitHub license](https://img.shields.io/github/license/Amit006/dict-checkbox-list-todo)](https://github.com/Amit006/dict-checkbox-list-todo/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Amit006/dict-checkbox-list-todo)](https://github.com/Amit006/dict-checkbox-list-todo/stargazers)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
 
-Currently, two official plugins are available:
+A sophisticated task management system combining todo list functionality with directory-style grouping, featuring intelligent parent-child checkbox relationships and persistent local storage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Application Preview](screenshot.png) <!-- Replace with actual screenshot -->
 
-## Expanding the ESLint configuration
+## Features ✨
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 📝 Todo List
+- **Add tasks** with Enter key
+- **Toggle completion** with checkboxes
+- **Delete tasks** permanently
+- **Persistent storage** across sessions
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 🗂️ Directory Listing
+- **Hierarchical group structure** visualization
+- **Smart checkbox propagation**:
+  - Parent selection ➔ All children checked
+  - All children checked ➔ Parent auto-checked
+  - Partial selection ➔ Indeterminate parent state
+- **Visual hierarchy** with indentation
+- **Bulk operations** through parent checkboxes
+
+### 🎛️ Advanced Functionality
+- State persistence using Local Storage
+- Responsive design for all screen sizes
+- Clean, minimalist user interface
+- Error-free keyboard interactions
+
+## Technologies Used 🛠️
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Data Management**: Nested dictionary structures
+- **State Persistence**: Browser Local Storage API
+- **UI Patterns**: Component-based organization
+
+## Getting Started 🚀
+
+### Prerequisites
+- Modern web browser (Chrome 80+, Firefox 72+, Edge 80+)
+- Git (for development)
+
+### Installation
+```bash
+git clone https://github.com/Amit006/dict-checkbox-list-todo.git
+cd dict-checkbox-list-todo
+npm run dev
+```
+Key Implementation Details 🔍
+Data Structure
+```javascript
+{
+  "group-1": {
+    "name": "Work Tasks",
+    "state": "indeterminate",
+    "items": {
+      "task-1": { "text": "Project Setup", "completed": true },
+      "task-2": { "text": "API Documentation", "completed": false }
+    }
+  }
+}
+```
+Checkbox Logic
+```javascript
+function updateParentState(groupId) {
+  const group = data[groupId];
+  const children = Object.values(group.items);
+  
+  const completedCount = children.filter(item => item.completed).length;
+  
+  if (completedCount === 0) {
+    group.state = 'unchecked';
+  } else if (completedCount === children.length) {
+    group.state = 'checked';
+  } else {
+    group.state = 'indeterminate';
+  }
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Contributing 🤝:
+ - Contributions are welcome! Please follow these guidelines:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+ - Fork the repository
+ - Create a feature branch (git checkout -b feature/your-feature)
+ - Commit changes (git commit -m 'Add some feature')
+ - Push to branch (git push origin feature/your-feature)
+ - Open a Pull Request
+ - Please ensure tests are added for new features.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+License 📄:
+ - This project is licensed under the MIT License - see LICENSE for details.
+
+Made with ❤️ by Amit
