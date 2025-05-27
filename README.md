@@ -7,8 +7,8 @@
 
 A sophisticated task management system combining todo list functionality with directory-style grouping, featuring intelligent parent-child checkbox relationships and persistent local storage.
 
-![Application Preview](![image](https://github.com/user-attachments/assets/0c8e9b56-bde7-4692-ac5f-a95db6b17b09)
-) <!-- Replace with actual screenshot -->
+![image](https://github.com/user-attachments/assets/315086c6-9d1c-44e3-95f7-1955710a043e)
+ <!-- Replace with actual screenshot -->
 
 ## Features ✨
 
